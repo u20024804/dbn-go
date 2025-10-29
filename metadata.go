@@ -12,6 +12,7 @@ import (
 const (
 	HeaderVersion1            = 1
 	HeaderVersion2            = 2
+	HeaderVersion3            = 3
 	MetadataV1_SymbolCstrLen  = 22
 	MetadataV1_ReservedLen    = 47
 	MetadataV2_SymbolCstrLen  = 71
@@ -309,7 +310,7 @@ func ReadMetadata(r io.Reader) (*Metadata, error) {
 	switch versionNum := mp.VersionRaw[3]; versionNum {
 	case HeaderVersion1:
 		return readMetadataV1(b, mp)
-	case HeaderVersion2:
+	case HeaderVersion2, HeaderVersion3:
 		return readMetadataV2(b, mp)
 	default:
 		return nil, ErrInvalidDBNVersion
